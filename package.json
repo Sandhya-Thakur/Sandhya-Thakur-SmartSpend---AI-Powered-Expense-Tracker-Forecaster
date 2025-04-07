@@ -2,15 +2,15 @@
   "name": "app",
   "version": "0.1.0",
   "private": true,
- "scripts": {
-  "dev": "next dev",
-  "build": "next build",
-  "start": "next start",
-  "lint": "next lint",
-  "db:generate": "node ./node_modules/drizzle-kit/bin.cjs generate",
-  "db:push": "node ./node_modules/drizzle-kit/bin.cjs push",
-  "db:studio": "node ./node_modules/drizzle-kit/bin.cjs studio"
-},
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "db:generate": "node ./node_modules/drizzle-kit/bin.cjs generate",
+    "db:push": "node ./node_modules/drizzle-kit/bin.cjs push",
+    "db:studio": "node ./node_modules/drizzle-kit/bin.cjs studio"
+  },
   "dependencies": {
     "@clerk/nextjs": "^6.13.0",
     "@neondatabase/serverless": "^1.0.0",
@@ -18,7 +18,11 @@
     "drizzle-orm": "^0.41.0",
     "next": "15.2.4",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-datepicker": "^8.2.1",
+    "react-dom": "^19.0.0",
+    "react-icons": "^5.5.0",
+    "recharts": "^2.15.2",
+    "uuid": "^11.1.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
@@ -26,6 +30,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/uuid": "^10.0.0",
     "drizzle-kit": "^0.30.6",
     "eslint": "^9",
     "eslint-config-next": "15.2.4",
