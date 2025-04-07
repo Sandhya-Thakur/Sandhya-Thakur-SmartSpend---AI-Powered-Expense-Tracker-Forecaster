@@ -1,28 +1,26 @@
-💸 SmartSpend – AI-Powered Expense Tracker & Forecaster
-SmartSpend is an intelligent, full-stack expense tracking and forecasting platform that combines modern web development with machine learning and deep learning. It helps users manage their expenses, predict future spending, detect anomalies, and gain insights into spending habits — all through a sleek, interactive dashboard.
+# 💸 SmartSpend – AI-Powered Expense Tracker & Forecaster
 
-🚀 Features
-🔍 Expense Tracking
-Easy entry and management of expenses
+SmartSpend is an intelligent, full-stack expense tracking and forecasting platform that combines modern web development with machine learning. It helps users manage their expenses, predict future spending, detect anomalies, and gain actionable insights — all through a clean, interactive dashboard.
 
-Automatic categorization using ML models
+---
 
-CRUD operations for full control over your data
+## 🚀 Features
 
-📊 Intelligent Insights
-Time-series forecasting with LSTM networks
+### 🔍 Expense Tracking
+- Easy expense entry and management
+- Automatic categorization using ML models
+- Full CRUD operations
 
-Anomaly detection for unusual spending patterns
+### 📊 Intelligent Insights
+- Time-series forecasting with LSTM networks
+- Anomaly detection for unusual spending patterns (Isolation Forest)
+- Spending pattern analysis with clustering
+- Automatic category classification
 
-Spending pattern analysis via clustering
+### 🖥️ Dashboard & Visualizations
+- Real-time analytics using Recharts
+- Predicted vs actual spending trends
+- Notifications and alerts
+- Personalized financial recommendations
 
-Category classification using supervised ML
-
-📈 Dashboard & Visualizations
-Real-time visual analytics with Recharts
-
-Predicted vs actual spending trends
-
-Alerts for anomalies
-
-Personalized financial recommendations
+---
