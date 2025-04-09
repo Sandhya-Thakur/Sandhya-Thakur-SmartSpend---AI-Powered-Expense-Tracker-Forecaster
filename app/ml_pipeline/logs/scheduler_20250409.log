@@ -1,0 +1,60 @@
+2025-04-09 12:59:41,411 - INFO - Starting activity-based retraining scheduler
+2025-04-09 12:59:41,411 - INFO - Settings: max_interval=24h, activity_threshold=10, check_interval=900s
+2025-04-09 12:59:41,412 - INFO - Current transaction count based on data/combined/combined_data.csv: 17
+2025-04-09 12:59:41,412 - INFO - Saved current transaction count: 17
+2025-04-09 12:59:41,412 - INFO - No previous training detected. Running initial training.
+2025-04-09 12:59:41,412 - INFO - Current transaction count based on data/combined/combined_data.csv: 17
+2025-04-09 12:59:41,412 - INFO - Starting data extraction process
+2025-04-09 12:59:46,753 - INFO - Data extraction completed successfully
+2025-04-09 12:59:46,753 - INFO - Current transaction count based on data/combined/combined_data.csv: 17
+2025-04-09 12:59:46,753 - INFO - Starting retraining pipeline (budget=True, continuous=True, test=True)
+2025-04-09 12:59:46,753 - INFO - Starting data extraction process
+2025-04-09 12:59:50,806 - INFO - Data extraction completed successfully
+2025-04-09 12:59:50,806 - INFO - Current transaction count based on data/combined/combined_data.csv: 17
+2025-04-09 12:59:50,806 - INFO - Saved current transaction count: 17
+2025-04-09 12:59:50,807 - INFO - Starting model training process with budget_features=True, continuous_learning=True
+2025-04-09 12:59:53,571 - INFO - Model training completed successfully
+2025-04-09 12:59:53,572 - INFO - Starting model testing process
+2025-04-09 12:59:54,796 - INFO - Model testing completed successfully
+2025-04-09 12:59:54,797 - INFO - Retraining pipeline completed successfully
+2025-04-09 12:59:54,797 - INFO - Retraining completed successfully
+2025-04-09 12:59:54,797 - INFO - Saved current transaction count: 17
+2025-04-09 12:59:54,799 - INFO - Hours since last training: 0.00
+2025-04-09 12:59:54,799 - INFO - Hours until time-based retraining: 24.00
+2025-04-09 12:59:54,799 - INFO - Next activity check in 15.0 minutes
+2025-04-09 13:00:30,657 - INFO - Starting activity-based retraining scheduler
+2025-04-09 13:00:30,657 - INFO - Settings: max_interval=24h, activity_threshold=10, check_interval=900s
+2025-04-09 13:00:30,658 - INFO - Current transaction count based on data/combined/combined_data.csv: 17
+2025-04-09 13:00:30,659 - INFO - Current transaction count based on data/combined/combined_data.csv: 17
+2025-04-09 13:00:30,659 - INFO - No retraining needed. Current transactions: 17, Last recorded: 17
+2025-04-09 13:00:30,659 - INFO - Hours since last training: 0.01
+2025-04-09 13:00:30,659 - INFO - Hours until time-based retraining: 23.99
+2025-04-09 13:00:30,659 - INFO - Next activity check in 15.0 minutes
+2025-04-09 13:14:12,876 - INFO - Starting activity-based retraining scheduler
+2025-04-09 13:14:12,876 - INFO - Settings: max_interval=24h, activity_threshold=10, check_interval=900s
+2025-04-09 13:14:12,877 - INFO - Current transaction count based on data/combined/combined_data.csv: 17
+2025-04-09 13:14:12,879 - INFO - Current transaction count based on data/combined/combined_data.csv: 17
+2025-04-09 13:14:12,879 - INFO - No retraining needed. Current transactions: 17, Last recorded: 17
+2025-04-09 13:14:12,879 - INFO - Hours since last training: 0.24
+2025-04-09 13:14:12,879 - INFO - Hours until time-based retraining: 23.76
+2025-04-09 13:14:12,879 - INFO - Next activity check in 15.0 minutes
+2025-04-09 13:18:45,360 - INFO - Running one-time retraining process (budget=True, continuous=True)
+2025-04-09 13:18:45,361 - INFO - Starting retraining pipeline (budget=True, continuous=True, test=True)
+2025-04-09 13:18:45,361 - INFO - Starting data extraction process
+2025-04-09 13:18:50,493 - INFO - Data extraction completed successfully
+2025-04-09 13:18:50,493 - INFO - Starting model training process with budget_features=True, continuous_learning=True
+2025-04-09 13:18:53,275 - INFO - Model training completed successfully
+2025-04-09 13:18:53,275 - INFO - Starting model testing process
+2025-04-09 13:18:54,567 - INFO - Model testing completed successfully
+2025-04-09 13:18:54,567 - INFO - Retraining pipeline completed successfully
+2025-04-09 14:22:39,482 - INFO - Starting scheduled retraining (interval: 24 hours, budget=True)
+2025-04-09 14:22:39,482 - INFO - Starting retraining pipeline (budget=True, continuous=True, test=True)
+2025-04-09 14:22:39,482 - INFO - Starting data extraction process
+2025-04-09 14:22:44,040 - INFO - Data extraction completed successfully
+2025-04-09 14:22:44,040 - INFO - Starting model training process with budget_features=True, continuous_learning=True
+2025-04-09 14:22:46,894 - INFO - Model training completed successfully
+2025-04-09 14:22:46,894 - INFO - Starting model testing process
+2025-04-09 14:22:48,173 - INFO - Model testing completed successfully
+2025-04-09 14:22:48,173 - INFO - Retraining pipeline completed successfully
+2025-04-09 14:22:48,173 - INFO - Retraining completed successfully
+2025-04-09 14:22:48,174 - INFO - Next scheduled run: 2025-04-10 14:22:48.173990

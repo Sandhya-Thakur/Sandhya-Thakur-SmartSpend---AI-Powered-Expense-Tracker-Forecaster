@@ -1,0 +1,18 @@
+2025-04-09 14:19:40,130 - INFO - Starting scheduled forecast update
+2025-04-09 14:19:40,130 - INFO - Running forecast model update...
+2025-04-09 14:19:42,173 - INFO - Forecast model output: Spending Forecast
+Based on your history, you're projected to spend $8,770 next month, which is 391% higher than this month.
+
+2025-04-09 14:19:42,173 - INFO - Forecast file updated at 2025-04-09 14:19:41
+2025-04-09 14:19:42,173 - INFO - Running accuracy check...
+2025-04-09 14:19:43,403 - INFO - Accuracy check completed
+2025-04-09 14:19:43,403 - INFO - Forecast update completed successfully
+2025-04-09 14:23:41,743 - INFO - Starting scheduled forecast update
+2025-04-09 14:23:41,743 - INFO - Running forecast model update...
+2025-04-09 14:23:43,689 - INFO - Forecast model output: Spending Forecast
+Based on your history, you're projected to spend $7,600 next month, which is 325% higher than this month.
+
+2025-04-09 14:23:43,690 - INFO - Forecast file updated at 2025-04-09 14:23:43
+2025-04-09 14:23:43,690 - INFO - Running accuracy check...
+2025-04-09 14:23:44,976 - INFO - Accuracy check completed
+2025-04-09 14:23:44,976 - INFO - Forecast update completed successfully

@@ -1,0 +1,10 @@
+category_id,category_name,category_color,total_expense
+education,Education,#3F51B5,281.84
+entertainment,Entertainment,#9C27B0,256.02
+food-dining,Food & Dining,#FF5722,180.1
+healthcare,Healthcare,#00BCD4,35.0
+housing,Housing,#4CAF50,1700.0
+personal,Personal,#795548,191.44
+shopping,Shopping,#E91E63,669.73
+transportation,Transportation,#2196F3,545.62
+utilities,Utilities,#FFC107,285.08

@@ -69,3 +69,325 @@
 2025-04-08 21:32:02,544 - INFO - Test MAE: 132.1276
 2025-04-08 21:32:02,748 - INFO - Model saved to models/lstm_model.pth
 2025-04-08 21:32:02,748 - INFO - LSTM model training and evaluation completed.
+2025-04-09 12:43:33,661 - INFO - Starting model training run at 20250409_124333
+2025-04-09 12:43:33,667 - INFO - Loaded 17 records from data/combined/combined_data.csv
+2025-04-09 12:43:33,667 - INFO - Columns in data: ['date', 'total_expense', 'budget_amount', 'remaining_budget', 'budget_variance_pct']
+2025-04-09 12:43:33,667 - INFO - Using budget features in the model
+2025-04-09 12:43:33,669 - INFO - Multivariate X shape: (10, 7, 4), y shape: (10, 1)
+2025-04-09 12:43:33,669 - INFO - Using input size: 4 (with budget features)
+2025-04-09 12:43:33,669 - INFO - Training data shape: torch.Size([8, 7, 4]), torch.Size([8, 1])
+2025-04-09 12:43:33,670 - INFO - Testing data shape: torch.Size([2, 7, 4]), torch.Size([2, 1])
+2025-04-09 12:43:34,264 - INFO - Epoch [10/100], Loss: 0.1255
+2025-04-09 12:43:34,281 - INFO - Epoch [20/100], Loss: 0.1203
+2025-04-09 12:43:34,297 - INFO - Epoch [30/100], Loss: 0.0800
+2025-04-09 12:43:34,312 - INFO - Epoch [40/100], Loss: 0.0879
+2025-04-09 12:43:34,328 - INFO - Epoch [50/100], Loss: 0.1007
+2025-04-09 12:43:34,344 - INFO - Epoch [60/100], Loss: 0.0800
+2025-04-09 12:43:34,360 - INFO - Epoch [70/100], Loss: 0.1087
+2025-04-09 12:43:34,377 - INFO - Epoch [80/100], Loss: 0.1027
+2025-04-09 12:43:34,394 - INFO - Epoch [90/100], Loss: 0.0839
+2025-04-09 12:43:34,410 - INFO - Epoch [100/100], Loss: 0.0762
+2025-04-09 12:43:34,411 - INFO - Test MSE: 54042.3555
+2025-04-09 12:43:34,411 - INFO - Test RMSE: 232.4701
+2025-04-09 12:43:34,411 - INFO - Test MAE: 183.5195
+2025-04-09 12:43:34,411 - INFO - Using univariate forecasting (no budget features)
+2025-04-09 12:43:34,412 - ERROR - Error in future forecasting: Sizes of tensors must match except in dimension 1. Expected size 4 but got size 1 for tensor number 1 in the list.
+2025-04-09 12:43:34,584 - INFO - Model saved to models/enhanced_lstm_model.pth
+2025-04-09 12:43:34,584 - INFO - LSTM model training and evaluation completed. Used budget features: True
+2025-04-09 12:59:52,324 - INFO - Starting model training run at 20250409_125952
+2025-04-09 12:59:52,328 - INFO - Loaded 17 records from data/combined/combined_data.csv
+2025-04-09 12:59:52,328 - INFO - Columns in data: ['date', 'total_expense', 'budget_amount', 'remaining_budget', 'budget_variance_pct']
+2025-04-09 12:59:52,328 - INFO - Using budget features in the model
+2025-04-09 12:59:52,329 - INFO - Multivariate X shape: (10, 7, 4), y shape: (10, 1)
+2025-04-09 12:59:52,333 - INFO - Using input size: 4 (with budget features)
+2025-04-09 12:59:52,333 - INFO - Training data shape: torch.Size([8, 7, 4]), torch.Size([8, 1])
+2025-04-09 12:59:52,333 - INFO - Testing data shape: torch.Size([2, 7, 4]), torch.Size([2, 1])
+2025-04-09 12:59:52,340 - INFO - Loaded existing model from models/enhanced_lstm_model.pth
+2025-04-09 12:59:52,910 - INFO - Epoch [10/100], Loss: 0.0926
+2025-04-09 12:59:52,926 - INFO - Epoch [20/100], Loss: 0.0906
+2025-04-09 12:59:52,942 - INFO - Epoch [30/100], Loss: 0.0772
+2025-04-09 12:59:52,958 - INFO - Epoch [40/100], Loss: 0.0732
+2025-04-09 12:59:52,974 - INFO - Epoch [50/100], Loss: 0.0781
+2025-04-09 12:59:52,989 - INFO - Epoch [60/100], Loss: 0.0599
+2025-04-09 12:59:53,004 - INFO - Epoch [70/100], Loss: 0.0936
+2025-04-09 12:59:53,020 - INFO - Epoch [80/100], Loss: 0.0963
+2025-04-09 12:59:53,038 - INFO - Epoch [90/100], Loss: 0.0732
+2025-04-09 12:59:53,054 - INFO - Epoch [100/100], Loss: 0.0798
+2025-04-09 12:59:53,055 - INFO - Test MSE: 20107.0918
+2025-04-09 12:59:53,055 - INFO - Test RMSE: 141.7995
+2025-04-09 12:59:53,055 - INFO - Test MAE: 136.6028
+2025-04-09 12:59:53,055 - INFO - Using multivariate forecasting with budget features
+2025-04-09 12:59:53,056 - ERROR - Error in future forecasting: setting an array element with a sequence. The requested array has an inhomogeneous shape after 2 dimensions. The detected shape was (1, 4) + inhomogeneous part.
+2025-04-09 12:59:53,056 - ERROR - Traceback (most recent call last):
+  File "/Users/sandhyathakur/Desktop/AI/AI projects/SmartSpend - AI-Powered Expense Tracker & Forecaster/app/ml_pipeline/lstm_model.py", line 498, in main
+    future_values = forecast_future(
+        model,
+    ...<4 lines>...
+        use_budget_features=actual_use_budget
+    )
+  File "/Users/sandhyathakur/Desktop/AI/AI projects/SmartSpend - AI-Powered Expense Tracker & Forecaster/app/ml_pipeline/lstm_model.py", line 350, in forecast_future
+    new_step = np.array([[pred.item(), last_budget_amount, last_remaining_budget, last_budget_variance]])
+ValueError: setting an array element with a sequence. The requested array has an inhomogeneous shape after 2 dimensions. The detected shape was (1, 4) + inhomogeneous part.
+
+2025-04-09 12:59:53,232 - INFO - Model saved to models/enhanced_lstm_model.pth
+2025-04-09 12:59:53,232 - INFO - LSTM model training and evaluation completed. Used budget features: True
+2025-04-09 12:59:54,599 - INFO - Starting model testing...
+2025-04-09 12:59:54,599 - INFO - Testing model loading...
+2025-04-09 12:59:54,600 - INFO - Model loaded successfully
+2025-04-09 12:59:54,600 - INFO - Testing model predictions...
+2025-04-09 12:59:54,602 - INFO - Loaded 17 records from data/combined/combined_data.csv
+2025-04-09 12:59:54,602 - INFO - Columns in data: ['date', 'total_expense', 'budget_amount', 'remaining_budget', 'budget_variance_pct']
+2025-04-09 12:59:54,602 - INFO - Generating 14 days of predictions...
+2025-04-09 12:59:54,602 - INFO - Using univariate forecasting (no budget features)
+2025-04-09 12:59:54,602 - ERROR - Error in prediction testing: 'MinMaxScaler' object is not subscriptable
+2025-04-09 12:59:54,603 - INFO - Testing completed
+2025-04-09 13:05:35,710 - INFO - Starting model testing...
+2025-04-09 13:05:35,710 - INFO - Testing model loading...
+2025-04-09 13:05:35,718 - INFO - Enhanced model loaded successfully
+2025-04-09 13:05:35,718 - INFO - Testing model predictions...
+2025-04-09 13:05:35,723 - INFO - Loaded 17 records from data/combined/combined_data.csv
+2025-04-09 13:05:35,723 - INFO - Columns in data: ['date', 'total_expense', 'budget_amount', 'remaining_budget', 'budget_variance_pct']
+2025-04-09 13:05:35,724 - INFO - Generating 14 days of predictions...
+2025-04-09 13:05:35,724 - INFO - Using multivariate forecasting with budget features
+2025-04-09 13:05:35,742 - ERROR - Error in prediction testing: setting an array element with a sequence. The requested array has an inhomogeneous shape after 2 dimensions. The detected shape was (1, 4) + inhomogeneous part.
+2025-04-09 13:05:35,743 - ERROR - Traceback (most recent call last):
+  File "/Users/sandhyathakur/Desktop/AI/AI projects/SmartSpend - AI-Powered Expense Tracker & Forecaster/app/ml_pipeline/test_model.py", line 83, in test_prediction
+    future_preds = forecast_future(
+        model,
+    ...<4 lines>...
+        use_budget_features=is_enhanced_model
+    )
+  File "/Users/sandhyathakur/Desktop/AI/AI projects/SmartSpend - AI-Powered Expense Tracker & Forecaster/app/ml_pipeline/lstm_model.py", line 350, in forecast_future
+    new_step = np.array([[pred.item(), last_budget_amount, last_remaining_budget, last_budget_variance]])
+ValueError: setting an array element with a sequence. The requested array has an inhomogeneous shape after 2 dimensions. The detected shape was (1, 4) + inhomogeneous part.
+
+2025-04-09 13:05:35,743 - INFO - Testing model analysis...
+2025-04-09 13:05:35,744 - INFO - Loaded 17 records from data/combined/combined_data.csv
+2025-04-09 13:05:35,744 - INFO - Columns in data: ['date', 'total_expense', 'budget_amount', 'remaining_budget', 'budget_variance_pct']
+2025-04-09 13:05:35,955 - INFO - Feature analysis visualization saved to plots/feature_analysis.png
+2025-04-09 13:05:35,955 - INFO - Testing completed
+2025-04-09 13:10:11,080 - INFO - Starting spending forecast...
+2025-04-09 13:10:11,080 - INFO - Loading model...
+2025-04-09 13:10:11,088 - INFO - Enhanced model loaded successfully
+2025-04-09 13:10:11,088 - INFO - Generating monthly forecast...
+2025-04-09 13:10:11,092 - INFO - Loaded 17 records from data/combined/combined_data.csv
+2025-04-09 13:10:11,092 - INFO - Columns in data: ['date', 'total_expense', 'budget_amount', 'remaining_budget', 'budget_variance_pct']
+2025-04-09 13:10:11,094 - INFO - Current/last month spending: $1787.13
+2025-04-09 13:10:11,094 - INFO - Forecasting spending for the next 30 days...
+2025-04-09 13:10:11,094 - INFO - Using multivariate forecasting with budget features
+2025-04-09 13:10:11,111 - ERROR - Error in forecast_future: setting an array element with a sequence. The requested array has an inhomogeneous shape after 2 dimensions. The detected shape was (1, 4) + inhomogeneous part.
+2025-04-09 13:10:11,111 - ERROR - Traceback (most recent call last):
+  File "/Users/sandhyathakur/Desktop/AI/AI projects/SmartSpend - AI-Powered Expense Tracker & Forecaster/app/ml_pipeline/test_model.py", line 109, in get_month_forecast
+    future_preds = forecast_future(
+        model,
+    ...<4 lines>...
+        use_budget_features=is_enhanced
+    )
+  File "/Users/sandhyathakur/Desktop/AI/AI projects/SmartSpend - AI-Powered Expense Tracker & Forecaster/app/ml_pipeline/lstm_model.py", line 350, in forecast_future
+    new_step = np.array([[pred.item(), last_budget_amount, last_remaining_budget, last_budget_variance]])
+ValueError: setting an array element with a sequence. The requested array has an inhomogeneous shape after 2 dimensions. The detected shape was (1, 4) + inhomogeneous part.
+
+2025-04-09 13:10:11,111 - INFO - Trying alternative forecasting approach...
+2025-04-09 13:10:11,117 - INFO - Forecast complete: $9320.98 (421.6% change)
+2025-04-09 13:10:11,118 - INFO - Forecast saved to latest_forecast.txt
+2025-04-09 13:18:51,995 - INFO - Starting model training run at 20250409_131851
+2025-04-09 13:18:51,999 - INFO - Loaded 17 records from data/combined/combined_data.csv
+2025-04-09 13:18:51,999 - INFO - Columns in data: ['date', 'total_expense', 'budget_amount', 'remaining_budget', 'budget_variance_pct']
+2025-04-09 13:18:51,999 - INFO - Using budget features in the model
+2025-04-09 13:18:52,000 - INFO - Multivariate X shape: (10, 7, 4), y shape: (10, 1)
+2025-04-09 13:18:52,005 - INFO - Using input size: 4 (with budget features)
+2025-04-09 13:18:52,005 - INFO - Training data shape: torch.Size([8, 7, 4]), torch.Size([8, 1])
+2025-04-09 13:18:52,005 - INFO - Testing data shape: torch.Size([2, 7, 4]), torch.Size([2, 1])
+2025-04-09 13:18:52,011 - INFO - Loaded existing model from models/enhanced_lstm_model.pth
+2025-04-09 13:18:52,566 - INFO - Epoch [10/100], Loss: 0.0903
+2025-04-09 13:18:52,582 - INFO - Epoch [20/100], Loss: 0.0830
+2025-04-09 13:18:52,598 - INFO - Epoch [30/100], Loss: 0.0771
+2025-04-09 13:18:52,613 - INFO - Epoch [40/100], Loss: 0.0723
+2025-04-09 13:18:52,627 - INFO - Epoch [50/100], Loss: 0.0747
+2025-04-09 13:18:52,642 - INFO - Epoch [60/100], Loss: 0.0575
+2025-04-09 13:18:52,657 - INFO - Epoch [70/100], Loss: 0.0867
+2025-04-09 13:18:52,672 - INFO - Epoch [80/100], Loss: 0.0923
+2025-04-09 13:18:52,687 - INFO - Epoch [90/100], Loss: 0.0723
+2025-04-09 13:18:52,702 - INFO - Epoch [100/100], Loss: 0.0819
+2025-04-09 13:18:52,703 - INFO - Test MSE: 18043.5781
+2025-04-09 13:18:52,703 - INFO - Test RMSE: 134.3264
+2025-04-09 13:18:52,703 - INFO - Test MAE: 132.5689
+2025-04-09 13:18:52,703 - INFO - Using multivariate forecasting with budget features
+2025-04-09 13:18:52,870 - INFO - Future forecast generated for 30 days
+2025-04-09 13:18:52,944 - INFO - Model saved to models/enhanced_lstm_model.pth
+2025-04-09 13:18:52,944 - INFO - LSTM model training and evaluation completed. Used budget features: True
+2025-04-09 13:18:54,355 - INFO - Starting spending forecast...
+2025-04-09 13:18:54,355 - INFO - Loading model...
+2025-04-09 13:18:54,356 - INFO - Enhanced model loaded successfully
+2025-04-09 13:18:54,356 - INFO - Generating monthly forecast...
+2025-04-09 13:18:54,358 - INFO - Loaded 17 records from data/combined/combined_data.csv
+2025-04-09 13:18:54,358 - INFO - Columns in data: ['date', 'total_expense', 'budget_amount', 'remaining_budget', 'budget_variance_pct']
+2025-04-09 13:18:54,359 - INFO - Current/last month spending: $1787.13
+2025-04-09 13:18:54,359 - INFO - Forecasting spending for the next 30 days...
+2025-04-09 13:18:54,359 - INFO - Using multivariate forecasting with budget features
+2025-04-09 13:18:54,365 - INFO - Forecast complete: $8769.18 (390.7% change)
+2025-04-09 13:18:54,365 - INFO - Forecast saved to latest_forecast.txt
+2025-04-09 13:23:11,154 - INFO - Starting spending forecast...
+2025-04-09 13:23:11,154 - INFO - Loading model...
+2025-04-09 13:23:11,164 - INFO - Enhanced model loaded successfully
+2025-04-09 13:23:11,164 - INFO - Generating monthly forecast...
+2025-04-09 13:23:11,168 - INFO - Loaded 17 records from data/combined/combined_data.csv
+2025-04-09 13:23:11,168 - INFO - Columns in data: ['date', 'total_expense', 'budget_amount', 'remaining_budget', 'budget_variance_pct']
+2025-04-09 13:23:11,170 - INFO - Current/last month spending: $1787.13
+2025-04-09 13:23:11,171 - INFO - Forecasting spending for the next 30 days...
+2025-04-09 13:23:11,171 - INFO - Using multivariate forecasting with budget features
+2025-04-09 13:23:11,198 - INFO - Forecast complete: $8769.18 (390.7% change)
+2025-04-09 13:23:11,198 - INFO - Forecast saved to latest_forecast.txt
+2025-04-09 13:23:11,199 - INFO - Loaded 17 records from data/combined/combined_data.csv
+2025-04-09 13:23:11,199 - INFO - Columns in data: ['date', 'total_expense', 'budget_amount', 'remaining_budget', 'budget_variance_pct']
+2025-04-09 13:23:11,199 - INFO - Creating forecast visualization...
+2025-04-09 13:23:11,412 - ERROR - Error creating visualization: 'Timestamp' object has no attribute 'year_month'
+2025-04-09 13:23:11,413 - ERROR - Traceback (most recent call last):
+  File "/Users/sandhyathakur/Desktop/AI/AI projects/SmartSpend - AI-Powered Expense Tracker & Forecaster/app/ml_pipeline/test_model.py", line 265, in plot_forecast
+    next_month_date = pd.Period(last_date.year_month + 1).to_timestamp()
+                                ^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Timestamp' object has no attribute 'year_month'
+
+2025-04-09 13:23:11,413 - INFO - Analyzing forecast quality...
+2025-04-09 13:23:11,413 - INFO - Forecast quality analysis saved to forecast_quality_report.txt
+2025-04-09 13:27:10,712 - INFO - Starting spending forecast...
+2025-04-09 13:27:10,712 - INFO - Loading model...
+2025-04-09 13:27:10,720 - INFO - Enhanced model loaded successfully
+2025-04-09 13:27:10,720 - INFO - Generating monthly forecast...
+2025-04-09 13:27:10,725 - INFO - Loaded 17 records from data/combined/combined_data.csv
+2025-04-09 13:27:10,725 - INFO - Columns in data: ['date', 'total_expense', 'budget_amount', 'remaining_budget', 'budget_variance_pct']
+2025-04-09 13:27:10,725 - INFO - Current/last month spending: $1787.13
+2025-04-09 13:27:10,726 - INFO - Forecasting spending for the next 30 days...
+2025-04-09 13:27:10,726 - INFO - Using multivariate forecasting with budget features
+2025-04-09 13:27:10,754 - INFO - Forecast complete: $8769.18 (390.7% change)
+2025-04-09 13:31:50,624 - INFO - Starting spending forecast...
+2025-04-09 13:31:50,624 - INFO - Loading model...
+2025-04-09 13:31:50,633 - INFO - Enhanced model loaded successfully
+2025-04-09 13:31:50,639 - INFO - Loaded 17 records from data/combined/combined_data.csv
+2025-04-09 13:31:50,639 - INFO - Columns in data: ['date', 'total_expense', 'budget_amount', 'remaining_budget', 'budget_variance_pct']
+2025-04-09 13:31:50,639 - INFO - Generating monthly forecast...
+2025-04-09 13:31:50,640 - INFO - Loaded 17 records from data/combined/combined_data.csv
+2025-04-09 13:31:50,640 - INFO - Columns in data: ['date', 'total_expense', 'budget_amount', 'remaining_budget', 'budget_variance_pct']
+2025-04-09 13:31:50,642 - INFO - Current/last month spending: $1787.13
+2025-04-09 13:31:50,643 - INFO - Forecasting spending for the next 30 days...
+2025-04-09 13:31:50,643 - INFO - Using multivariate forecasting with budget features
+2025-04-09 13:31:50,669 - INFO - Forecast complete: $8769.18 (390.7% change)
+2025-04-09 13:32:12,003 - INFO - Starting spending forecast...
+2025-04-09 13:32:12,003 - INFO - Loading model...
+2025-04-09 13:32:12,005 - INFO - Enhanced model loaded successfully
+2025-04-09 13:32:12,009 - INFO - Loaded 17 records from data/combined/combined_data.csv
+2025-04-09 13:32:12,009 - INFO - Columns in data: ['date', 'total_expense', 'budget_amount', 'remaining_budget', 'budget_variance_pct']
+2025-04-09 13:32:12,010 - INFO - Generating monthly forecast...
+2025-04-09 13:32:12,010 - INFO - Loaded 17 records from data/combined/combined_data.csv
+2025-04-09 13:32:12,010 - INFO - Columns in data: ['date', 'total_expense', 'budget_amount', 'remaining_budget', 'budget_variance_pct']
+2025-04-09 13:32:12,012 - INFO - Current/last month spending: $1787.13
+2025-04-09 13:32:12,012 - INFO - Forecasting spending for the next 30 days...
+2025-04-09 13:32:12,012 - INFO - Using multivariate forecasting with budget features
+2025-04-09 13:32:12,019 - INFO - Forecast complete: $8769.18 (390.7% change)
+2025-04-09 13:32:24,049 - INFO - Starting spending forecast...
+2025-04-09 13:32:24,050 - INFO - Loading model...
+2025-04-09 13:32:24,051 - INFO - Enhanced model loaded successfully
+2025-04-09 13:32:24,054 - INFO - Loaded 17 records from data/combined/combined_data.csv
+2025-04-09 13:32:24,054 - INFO - Columns in data: ['date', 'total_expense', 'budget_amount', 'remaining_budget', 'budget_variance_pct']
+2025-04-09 13:32:24,054 - INFO - Generating monthly forecast...
+2025-04-09 13:32:24,054 - INFO - Loaded 17 records from data/combined/combined_data.csv
+2025-04-09 13:32:24,054 - INFO - Columns in data: ['date', 'total_expense', 'budget_amount', 'remaining_budget', 'budget_variance_pct']
+2025-04-09 13:32:24,055 - INFO - Current/last month spending: $1787.13
+2025-04-09 13:32:24,056 - INFO - Forecasting spending for the next 30 days...
+2025-04-09 13:32:24,056 - INFO - Using multivariate forecasting with budget features
+2025-04-09 13:32:24,062 - INFO - Forecast complete: $8769.18 (390.7% change)
+2025-04-09 13:32:32,419 - INFO - Starting spending forecast...
+2025-04-09 13:32:32,419 - INFO - Loading model...
+2025-04-09 13:32:32,421 - INFO - Enhanced model loaded successfully
+2025-04-09 13:32:32,423 - INFO - Loaded 17 records from data/combined/combined_data.csv
+2025-04-09 13:32:32,423 - INFO - Columns in data: ['date', 'total_expense', 'budget_amount', 'remaining_budget', 'budget_variance_pct']
+2025-04-09 13:32:32,423 - INFO - Generating monthly forecast...
+2025-04-09 13:32:32,423 - INFO - Loaded 17 records from data/combined/combined_data.csv
+2025-04-09 13:32:32,423 - INFO - Columns in data: ['date', 'total_expense', 'budget_amount', 'remaining_budget', 'budget_variance_pct']
+2025-04-09 13:32:32,424 - INFO - Current/last month spending: $1787.13
+2025-04-09 13:32:32,425 - INFO - Forecasting spending for the next 30 days...
+2025-04-09 13:32:32,425 - INFO - Using multivariate forecasting with budget features
+2025-04-09 13:32:32,431 - INFO - Forecast complete: $8769.18 (390.7% change)
+2025-04-09 13:33:45,790 - INFO - Starting spending forecast...
+2025-04-09 13:33:45,790 - INFO - Loading model...
+2025-04-09 13:33:45,798 - INFO - Enhanced model loaded successfully
+2025-04-09 13:33:45,803 - INFO - Loaded 17 records from data/combined/combined_data.csv
+2025-04-09 13:33:45,803 - INFO - Columns in data: ['date', 'total_expense', 'budget_amount', 'remaining_budget', 'budget_variance_pct']
+2025-04-09 13:33:45,803 - INFO - Checking model accuracy on historical data...
+2025-04-09 13:33:45,804 - INFO - Evaluating model on historical data...
+2025-04-09 14:19:41,874 - INFO - Starting spending forecast...
+2025-04-09 14:19:41,874 - INFO - Loading model...
+2025-04-09 14:19:41,882 - INFO - Enhanced model loaded successfully
+2025-04-09 14:19:41,887 - INFO - Loaded 17 records from data/combined/combined_data.csv
+2025-04-09 14:19:41,887 - INFO - Columns in data: ['date', 'total_expense', 'budget_amount', 'remaining_budget', 'budget_variance_pct']
+2025-04-09 14:19:41,887 - INFO - Generating monthly forecast...
+2025-04-09 14:19:41,887 - INFO - Loaded 17 records from data/combined/combined_data.csv
+2025-04-09 14:19:41,888 - INFO - Columns in data: ['date', 'total_expense', 'budget_amount', 'remaining_budget', 'budget_variance_pct']
+2025-04-09 14:19:41,889 - INFO - Current/last month spending: $1787.13
+2025-04-09 14:19:41,889 - INFO - Forecasting spending for the next 30 days...
+2025-04-09 14:19:41,889 - INFO - Using multivariate forecasting with budget features
+2025-04-09 14:19:41,911 - INFO - Forecast complete: $8769.18 (390.7% change)
+2025-04-09 14:19:43,192 - INFO - Starting spending forecast...
+2025-04-09 14:19:43,192 - INFO - Loading model...
+2025-04-09 14:19:43,193 - INFO - Enhanced model loaded successfully
+2025-04-09 14:19:43,195 - INFO - Loaded 17 records from data/combined/combined_data.csv
+2025-04-09 14:19:43,195 - INFO - Columns in data: ['date', 'total_expense', 'budget_amount', 'remaining_budget', 'budget_variance_pct']
+2025-04-09 14:19:43,195 - INFO - Checking model accuracy on historical data...
+2025-04-09 14:19:43,196 - INFO - Evaluating model on historical data...
+2025-04-09 14:22:45,584 - INFO - Starting model training run at 20250409_142245
+2025-04-09 14:22:45,591 - INFO - Loaded 19 records from data/combined/combined_data.csv
+2025-04-09 14:22:45,591 - INFO - Columns in data: ['date', 'total_expense', 'budget_amount', 'remaining_budget', 'budget_variance_pct']
+2025-04-09 14:22:45,591 - INFO - Using budget features in the model
+2025-04-09 14:22:45,592 - INFO - Multivariate X shape: (12, 7, 4), y shape: (12, 1)
+2025-04-09 14:22:45,597 - INFO - Using input size: 4 (with budget features)
+2025-04-09 14:22:45,597 - INFO - Training data shape: torch.Size([9, 7, 4]), torch.Size([9, 1])
+2025-04-09 14:22:45,597 - INFO - Testing data shape: torch.Size([3, 7, 4]), torch.Size([3, 1])
+2025-04-09 14:22:45,603 - INFO - Loaded existing model from models/enhanced_lstm_model.pth
+2025-04-09 14:22:46,184 - INFO - Epoch [10/100], Loss: 0.0649
+2025-04-09 14:22:46,200 - INFO - Epoch [20/100], Loss: 0.0594
+2025-04-09 14:22:46,216 - INFO - Epoch [30/100], Loss: 0.0612
+2025-04-09 14:22:46,231 - INFO - Epoch [40/100], Loss: 0.0689
+2025-04-09 14:22:46,246 - INFO - Epoch [50/100], Loss: 0.0753
+2025-04-09 14:22:46,262 - INFO - Epoch [60/100], Loss: 0.0921
+2025-04-09 14:22:46,278 - INFO - Epoch [70/100], Loss: 0.0607
+2025-04-09 14:22:46,293 - INFO - Epoch [80/100], Loss: 0.0771
+2025-04-09 14:22:46,309 - INFO - Epoch [90/100], Loss: 0.0491
+2025-04-09 14:22:46,324 - INFO - Epoch [100/100], Loss: 0.0733
+2025-04-09 14:22:46,325 - INFO - Test MSE: 83149.9766
+2025-04-09 14:22:46,325 - INFO - Test RMSE: 288.3574
+2025-04-09 14:22:46,325 - INFO - Test MAE: 282.7906
+2025-04-09 14:22:46,325 - INFO - Using multivariate forecasting with budget features
+2025-04-09 14:22:46,457 - INFO - Future forecast generated for 30 days
+2025-04-09 14:22:46,541 - INFO - Model saved to models/enhanced_lstm_model.pth
+2025-04-09 14:22:46,542 - INFO - LSTM model training and evaluation completed. Used budget features: True
+2025-04-09 14:22:47,967 - INFO - Starting spending forecast...
+2025-04-09 14:22:47,967 - INFO - Loading model...
+2025-04-09 14:22:47,968 - INFO - Enhanced model loaded successfully
+2025-04-09 14:22:47,970 - INFO - Loaded 19 records from data/combined/combined_data.csv
+2025-04-09 14:22:47,970 - INFO - Columns in data: ['date', 'total_expense', 'budget_amount', 'remaining_budget', 'budget_variance_pct']
+2025-04-09 14:22:47,970 - INFO - Generating monthly forecast...
+2025-04-09 14:22:47,970 - INFO - Loaded 19 records from data/combined/combined_data.csv
+2025-04-09 14:22:47,970 - INFO - Columns in data: ['date', 'total_expense', 'budget_amount', 'remaining_budget', 'budget_variance_pct']
+2025-04-09 14:22:47,971 - INFO - Current/last month spending: $1789.13
+2025-04-09 14:22:47,972 - INFO - Forecasting spending for the next 30 days...
+2025-04-09 14:22:47,972 - INFO - Using multivariate forecasting with budget features
+2025-04-09 14:22:47,977 - INFO - Forecast complete: $7602.41 (324.9% change)
+2025-04-09 14:23:43,396 - INFO - Starting spending forecast...
+2025-04-09 14:23:43,396 - INFO - Loading model...
+2025-04-09 14:23:43,405 - INFO - Enhanced model loaded successfully
+2025-04-09 14:23:43,410 - INFO - Loaded 19 records from data/combined/combined_data.csv
+2025-04-09 14:23:43,410 - INFO - Columns in data: ['date', 'total_expense', 'budget_amount', 'remaining_budget', 'budget_variance_pct']
+2025-04-09 14:23:43,410 - INFO - Generating monthly forecast...
+2025-04-09 14:23:43,411 - INFO - Loaded 19 records from data/combined/combined_data.csv
+2025-04-09 14:23:43,411 - INFO - Columns in data: ['date', 'total_expense', 'budget_amount', 'remaining_budget', 'budget_variance_pct']
+2025-04-09 14:23:43,412 - INFO - Current/last month spending: $1789.13
+2025-04-09 14:23:43,413 - INFO - Forecasting spending for the next 30 days...
+2025-04-09 14:23:43,413 - INFO - Using multivariate forecasting with budget features
+2025-04-09 14:23:43,436 - INFO - Forecast complete: $7602.41 (324.9% change)
+2025-04-09 14:23:44,729 - INFO - Starting spending forecast...
+2025-04-09 14:23:44,729 - INFO - Loading model...
+2025-04-09 14:23:44,731 - INFO - Enhanced model loaded successfully
+2025-04-09 14:23:44,733 - INFO - Loaded 19 records from data/combined/combined_data.csv
+2025-04-09 14:23:44,733 - INFO - Columns in data: ['date', 'total_expense', 'budget_amount', 'remaining_budget', 'budget_variance_pct']
+2025-04-09 14:23:44,733 - INFO - Checking model accuracy on historical data...
+2025-04-09 14:23:44,734 - INFO - Evaluating model on historical data...
