@@ -175,20 +175,21 @@ const EditableExpense: React.FC<EditableExpenseProps> = ({ expenseId, onCancel, 
     if (!confirm('Are you sure you want to delete this expense? This action cannot be undone.')) {
       return;
     }
-
+  
     setIsDeleting(true);
     setError('');
-
+  
     try {
-      const response = await fetch(`/api/expenses?id=${expenseId}`, {
+      // Change this line to use the correct API path format
+      const response = await fetch(`/api/expenses/${expenseId}`, {
         method: 'DELETE',
       });
-
+  
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.error || 'Failed to delete expense');
       }
-
+  
       // Navigate to expenses list
       router.push('/expenses');
     } catch (error) {

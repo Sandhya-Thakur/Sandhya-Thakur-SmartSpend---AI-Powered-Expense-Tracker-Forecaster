@@ -1,12 +1,12 @@
+// components/budget/BudgetForm.tsx
 "use client";
 
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { FiTrash2 } from 'react-icons/fi';
+import { FiSave, FiX, FiTrash2 } from 'react-icons/fi';
 
-// Define the Category interface
 interface Category {
   id: string;
   name: string;
@@ -14,9 +14,10 @@ interface Category {
   icon: string;
 }
 
-interface ExpenseFormProps {
-  expenseId?: string;
+interface BudgetFormProps {
+  budgetId?: string;
   onSuccess?: () => void;
+  onCancel?: () => void;
 }
 
 // Static categories as a fallback
@@ -33,63 +34,84 @@ const staticCategories: Category[] = [
   { id: 'other', name: 'Other', color: '#607D8B', icon: 'more-horiz' }
 ];
 
-const ExpenseForm: React.FC<ExpenseFormProps> = ({ expenseId, onSuccess }) => {
+const BudgetForm: React.FC<BudgetFormProps> = ({ budgetId, onSuccess, onCancel }) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
   const [categories, setCategories] = useState<Category[]>(staticCategories);
-
-  // Initialize form with the first static category as default
+  
   const [formData, setFormData] = useState({
     amount: '',
-    description: '',
-    date: new Date(),
-    categoryId: staticCategories[0].id,
-    paymentMethod: '',
-    location: '',
+    period: 'monthly',
+    startDate: new Date(),
+    categoryId: '',
   });
 
-  // If editing an existing expense, fetch its data
+  // Fetch categories
   useEffect(() => {
-    if (expenseId) {
-      const fetchExpense = async () => {
+    const fetchCategories = async () => {
+      try {
+        const response = await fetch('/api/categories');
+        if (response.ok) {
+          const data = await response.json();
+          setCategories(data.categories.length > 0 ? data.categories : staticCategories);
+          
+          // Set default categoryId if categories are available
+          if (data.categories.length > 0 && !formData.categoryId) {
+            setFormData(prev => ({ ...prev, categoryId: data.categories[0].id }));
+          }
+        } else {
+          // Use static categories if API fails
+          setCategories(staticCategories);
+          if (!formData.categoryId) {
+            setFormData(prev => ({ ...prev, categoryId: staticCategories[0].id }));
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching categories:', error);
+        // Fall back to static categories if the fetch fails
+        setCategories(staticCategories);
+        if (!formData.categoryId) {
+          setFormData(prev => ({ ...prev, categoryId: staticCategories[0].id }));
+        }
+      }
+    };
+
+    fetchCategories();
+  }, []);
+
+  // If editing an existing budget, fetch its data
+  useEffect(() => {
+    if (budgetId) {
+      const fetchBudget = async () => {
         try {
           setIsLoading(true);
-          // Updated to match your new API structure
-          const response = await fetch(`/api/expenses?id=${expenseId}`);
+          const response = await fetch(`/api/budgets/${budgetId}`);
           
           if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.error || `Failed to fetch expense: ${response.status}`);
+            throw new Error('Failed to fetch budget data');
           }
           
           const data = await response.json();
           
-          // Check if the categoryId from API exists in our categories
-          // If not, default to the first category
-          const categoryExists = categories.some(cat => cat.id === data.expense.categoryId);
-          
           setFormData({
-            amount: data.expense.amount.toString(),
-            description: data.expense.description,
-            date: new Date(data.expense.date),
-            categoryId: categoryExists ? data.expense.categoryId : categories[0].id,
-            paymentMethod: data.expense.paymentMethod || '',
-            location: data.expense.location || '',
+            amount: data.budget.amount.toString(),
+            period: data.budget.period,
+            startDate: new Date(data.budget.startDate),
+            categoryId: data.budget.categoryId || '',
           });
         } catch (error) {
-          console.error('Error fetching expense:', error);
-          setError(`Failed to load expense data. ${error instanceof Error ? error.message : 'Please try again.'}`);
+          console.error('Error fetching budget:', error);
+          setError('Failed to load budget data');
         } finally {
           setIsLoading(false);
         }
       };
 
-      fetchExpense();
+      fetchBudget();
     }
-  }, [expenseId, categories]);
+  }, [budgetId]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -98,7 +120,7 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ expenseId, onSuccess }) => {
 
   const handleDateChange = (date: Date | null) => {
     if (date) {
-      setFormData(prev => ({ ...prev, date }));
+      setFormData(prev => ({ ...prev, startDate: date }));
     }
   };
 
@@ -106,17 +128,16 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ expenseId, onSuccess }) => {
     e.preventDefault();
     setIsLoading(true);
     setError('');
-    setSuccess('');
 
     try {
       // Validate form
-      if (!formData.amount || !formData.description || !formData.categoryId) {
+      if (!formData.amount || !formData.period) {
         throw new Error('Please fill all required fields');
       }
 
-      // Prepare the request - using the same API endpoint with different method
-      const url = '/api/expenses';
-      const method = expenseId ? 'PUT' : 'POST';
+      // Prepare the request
+      const url = budgetId ? `/api/budgets` : '/api/budgets';
+      const method = budgetId ? 'PUT' : 'POST';
       
       const response = await fetch(url, {
         method,
@@ -124,7 +145,7 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ expenseId, onSuccess }) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          ...(expenseId && { id: expenseId }), // Include ID only when updating
+          ...(budgetId && { id: budgetId }),
           ...formData,
           amount: parseFloat(formData.amount),
         }),
@@ -132,28 +153,19 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ expenseId, onSuccess }) => {
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.error || 'Failed to save expense');
-      }
-
-      setSuccess(expenseId ? 'Expense updated successfully!' : 'Expense added successfully!');
-      
-      // Reset form if it's a new expense
-      if (!expenseId) {
-        setFormData({
-          amount: '',
-          description: '',
-          date: new Date(),
-          categoryId: formData.categoryId, // Keep the selected category
-          paymentMethod: '',
-          location: '',
-        });
+        throw new Error(errorData.error || 'Failed to save budget');
       }
 
       // Call onSuccess callback if provided
       if (onSuccess) onSuccess();
+      
+      // Redirect if no callback
+      if (!onSuccess) {
+        router.push('/budgets');
+      }
 
     } catch (error) {
-      console.error('Error saving expense:', error);
+      console.error('Error saving budget:', error);
       setError(error instanceof Error ? error.message : 'An unexpected error occurred');
     } finally {
       setIsLoading(false);
@@ -161,9 +173,9 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ expenseId, onSuccess }) => {
   };
 
   const handleDelete = async () => {
-    if (!expenseId) return;
+    if (!budgetId) return;
     
-    if (!confirm('Are you sure you want to delete this expense? This action cannot be undone.')) {
+    if (!confirm('Are you sure you want to delete this budget? This action cannot be undone.')) {
       return;
     }
 
@@ -171,37 +183,46 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ expenseId, onSuccess }) => {
     setError('');
 
     try {
-      const response = await fetch(`/api/expenses?id=${expenseId}`, {
+      const response = await fetch(`/api/budgets?id=${budgetId}`, {
         method: 'DELETE',
       });
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.error || 'Failed to delete expense');
+        throw new Error(errorData.error || 'Failed to delete budget');
       }
 
-      // If successful, redirect to expenses list
-      setSuccess('Expense deleted successfully!');
-      setTimeout(() => {
-        router.push('/expenses');
-      }, 1000);
+      // Redirect to budgets list or call success callback
+      if (onSuccess) onSuccess();
+      else router.push('/budgets');
 
     } catch (error) {
-      console.error('Error deleting expense:', error);
-      setError(error instanceof Error ? error.message : 'Failed to delete expense');
+      console.error('Error deleting budget:', error);
+      setError(error instanceof Error ? error.message : 'Failed to delete budget');
     } finally {
       setIsDeleting(false);
     }
   };
 
+  if (isLoading) {
+    return (
+      <div className="p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md flex justify-center items-center min-h-[200px]">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-blue-500 mx-auto"></div>
+          <p className="mt-4 text-gray-600 dark:text-gray-400">Loading budget data...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
-          {expenseId ? 'Edit Expense' : 'Add New Expense'}
+          {budgetId ? 'Edit Budget' : 'Create Budget'}
         </h2>
         
-        {expenseId && (
+        {budgetId && (
           <button
             type="button"
             onClick={handleDelete}
@@ -220,18 +241,12 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ expenseId, onSuccess }) => {
         </div>
       )}
 
-      {success && (
-        <div className="mb-4 p-3 bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400 rounded-md">
-          {success}
-        </div>
-      )}
-
       <form onSubmit={handleSubmit}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Amount */}
           <div className="space-y-2">
             <label htmlFor="amount" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-              Amount <span className="text-red-500">*</span>
+              Budget Amount <span className="text-red-500">*</span>
             </label>
             <div className="relative">
               <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400">
@@ -252,88 +267,60 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ expenseId, onSuccess }) => {
             </div>
           </div>
 
-          {/* Date */}
+          {/* Period */}
           <div className="space-y-2">
-            <label htmlFor="date" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-              Date <span className="text-red-500">*</span>
+            <label htmlFor="period" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+              Period <span className="text-red-500">*</span>
+            </label>
+            <select
+              id="period"
+              name="period"
+              value={formData.period}
+              onChange={handleChange}
+              required
+              className="w-full rounded-md border border-gray-300 dark:border-gray-600 py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
+            >
+              <option value="weekly">Weekly</option>
+              <option value="monthly">Monthly</option>
+              <option value="yearly">Yearly</option>
+            </select>
+          </div>
+
+          {/* Start Date */}
+          <div className="space-y-2">
+            <label htmlFor="startDate" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+              Start Date <span className="text-red-500">*</span>
             </label>
             <DatePicker
-              selected={formData.date}
+              selected={formData.startDate}
               onChange={handleDateChange}
               className="w-full rounded-md border border-gray-300 dark:border-gray-600 py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
               dateFormat="yyyy-MM-dd"
-              maxDate={new Date()}
-            />
-          </div>
-
-          {/* Description */}
-          <div className="space-y-2 md:col-span-2">
-            <label htmlFor="description" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-              Description <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="text"
-              id="description"
-              name="description"
-              value={formData.description}
-              onChange={handleChange}
-              placeholder="What was this expense for?"
-              required
-              className="w-full rounded-md border border-gray-300 dark:border-gray-600 py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
             />
           </div>
 
           {/* Category */}
           <div className="space-y-2">
             <label htmlFor="categoryId" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-              Category <span className="text-red-500">*</span>
+              Category
             </label>
             <select
               id="categoryId"
               name="categoryId"
               value={formData.categoryId}
               onChange={handleChange}
-              required
               className="w-full rounded-md border border-gray-300 dark:border-gray-600 py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
             >
+              <option value="">Overall Budget (No Category)</option>
               {categories.map(category => (
                 <option key={category.id} value={category.id}>
                   {category.name}
                 </option>
               ))}
             </select>
-          </div>
-
-          {/* Payment Method */}
-          <div className="space-y-2">
-            <label htmlFor="paymentMethod" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-              Payment Method
-            </label>
-            <input
-              type="text"
-              id="paymentMethod"
-              name="paymentMethod"
-              value={formData.paymentMethod}
-              onChange={handleChange}
-              placeholder="Credit Card, Cash, etc."
-              className="w-full rounded-md border border-gray-300 dark:border-gray-600 py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
-            />
-          </div>
-
-          {/* Location */}
-          <div className="space-y-2 md:col-span-2">
-            <label htmlFor="location" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-              Location
-            </label>
-            <input
-              type="text"
-              id="location"
-              name="location"
-              value={formData.location}
-              onChange={handleChange}
-              placeholder="Where did this expense occur?"
-              className="w-full rounded-md border border-gray-300 dark:border-gray-600 py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
-            />
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+              Leave empty for an overall budget across all categories.
+            </p>
           </div>
         </div>
 
@@ -341,9 +328,10 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ expenseId, onSuccess }) => {
         <div className="mt-8 flex justify-end">
           <button
             type="button"
-            onClick={() => router.back()}
+            onClick={onCancel || (() => router.back())}
             className="mr-4 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
           >
+            <FiX className="inline mr-1" />
             Cancel
           </button>
           <button
@@ -351,7 +339,8 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ expenseId, onSuccess }) => {
             disabled={isLoading}
             className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-blue-300 dark:disabled:bg-blue-800"
           >
-            {isLoading ? 'Saving...' : expenseId ? 'Update Expense' : 'Add Expense'}
+            <FiSave className="inline mr-1" />
+            {isLoading ? 'Saving...' : budgetId ? 'Update Budget' : 'Create Budget'}
           </button>
         </div>
       </form>
@@ -359,4 +348,4 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ expenseId, onSuccess }) => {
   );
 };
 
-export default ExpenseForm;
+export default BudgetForm;

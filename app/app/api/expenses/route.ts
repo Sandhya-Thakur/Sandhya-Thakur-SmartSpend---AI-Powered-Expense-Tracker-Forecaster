@@ -1,3 +1,4 @@
+//app/api/expenses
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 import { expenses, categories } from '@/lib/db/schema';
@@ -104,7 +105,6 @@ export async function GET(request: NextRequest) {
 }
 
 // POST handler to create a new expense
-// POST handler to create a new expense
 export async function POST(request: NextRequest) {
   try {
     // Use Clerk's getAuth() helper to get the userId
@@ -127,8 +127,73 @@ export async function POST(request: NextRequest) {
       );
     }
     
-    // Always get a valid category ID (either create one or use an existing one)
-    const finalCategoryId = await getDefaultCategoryId(userId);
+    // Check if the provided category exists, if not create it
+    let finalCategoryId: string;
+    
+    if (categoryId) {
+      // Try to find the category
+      const existingCategory = await db
+        .select()
+        .from(categories)
+        .where(and(
+          eq(categories.id, categoryId),
+          eq(categories.userId, userId)
+        ))
+        .limit(1);
+      
+      if (existingCategory.length > 0) {
+        // Category exists, use it
+        finalCategoryId = categoryId;
+      } else {
+        // Category doesn't exist, create it using static category data
+        type CategoryKey = 'food-dining' | 'transportation' | 'housing' | 'utilities' | 
+                          'entertainment' | 'shopping' | 'healthcare' | 'personal' | 
+                          'education' | 'other';
+                          
+        type CategoryDetails = {
+          name: string;
+          color: string;
+          icon: string;
+        };
+        
+        const staticCategoryMap: Record<CategoryKey, CategoryDetails> = {
+          'food-dining': { name: 'Food & Dining', color: '#FF5722', icon: 'restaurant' },
+          'transportation': { name: 'Transportation', color: '#2196F3', icon: 'car' },
+          'housing': { name: 'Housing', color: '#4CAF50', icon: 'home' },
+          'utilities': { name: 'Utilities', color: '#FFC107', icon: 'bolt' },
+          'entertainment': { name: 'Entertainment', color: '#9C27B0', icon: 'movie' },
+          'shopping': { name: 'Shopping', color: '#E91E63', icon: 'shopping-bag' },
+          'healthcare': { name: 'Healthcare', color: '#00BCD4', icon: 'medical-services' },
+          'personal': { name: 'Personal', color: '#795548', icon: 'person' },
+          'education': { name: 'Education', color: '#3F51B5', icon: 'school' },
+          'other': { name: 'Other', color: '#607D8B', icon: 'more-horiz' }
+        };
+        
+        // Get category details or default to "Other" if category not in map
+        const categoryDetails = staticCategoryMap[categoryId as CategoryKey] || 
+          { name: 'Other', color: '#607D8B', icon: 'more-horiz' };
+        
+        // Create the category
+        const newCategory = await db
+          .insert(categories)
+          .values({
+            id: categoryId,
+            name: categoryDetails.name,
+            color: categoryDetails.color,
+            icon: categoryDetails.icon,
+            isDefault: false,
+            userId: userId,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+          })
+          .returning();
+        
+        finalCategoryId = newCategory[0].id;
+      }
+    } else {
+      // No category provided, use default
+      finalCategoryId = await getDefaultCategoryId(userId);
+    }
     
     // Create new expense
     const newExpenseId = nanoid();
@@ -139,7 +204,7 @@ export async function POST(request: NextRequest) {
         amount: parseFloat(amount),
         description,
         date: new Date(date),
-        categoryId: finalCategoryId, // Use the default category ID instead of the one from the form
+        categoryId: finalCategoryId,
         userId: userId,
         paymentMethod: paymentMethod || null,
         location: location || null,
@@ -157,7 +222,6 @@ export async function POST(request: NextRequest) {
     }, { status: 500 });
   }
 }
-
 // PUT handler to update an expense
 export async function PUT(request: NextRequest) {
   try {

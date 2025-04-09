@@ -1,0 +1,52 @@
+2025-04-08 14:21:32,040 - INFO - Running one-time retraining process
+2025-04-08 14:21:32,040 - INFO - Starting retraining pipeline
+2025-04-08 14:21:32,040 - INFO - Starting data extraction process
+2025-04-08 14:21:35,831 - INFO - Data extraction completed: Starting data extraction process...
+Database URL found: Yes
+Attempting to connect to the database...
+Connected to the NeonDB database successfully.
+Found 7 records in the expenses table
+Executing query to extract expense data...
+Extracted 7 expense records.
+Preprocessing data for time series analysis...
+Data preprocessing completed.
+Creating visualization: Daily Expenses Time Series
+Visualization saved as daily_expenses_time_series.png
+Creating sequences with length 7...
+Created 2 sequences with length 7 for LSTM training.
+Saving processed data to data directory...
+Saved daily data to data/daily_expenses.csv
+Saved weekly data to data/weekly_expenses.csv
+Saved monthly data to data/monthly_expenses.csv
+Data extraction and preprocessing completed successfully.
+Database connection closed.
+
+2025-04-08 14:21:35,831 - INFO - Starting model training process
+2025-04-08 14:21:38,564 - INFO - Model training completed: 
+2025-04-08 14:21:38,564 - INFO - Retraining pipeline completed successfully
+2025-04-08 21:31:56,494 - INFO - Running one-time retraining process
+2025-04-08 21:31:56,494 - INFO - Starting retraining pipeline
+2025-04-08 21:31:56,494 - INFO - Starting data extraction process
+2025-04-08 21:31:59,868 - INFO - Data extraction completed: Starting data extraction process...
+Database URL found: Yes
+Attempting to connect to the database...
+Connected to the NeonDB database successfully.
+Found 25 records in the expenses table
+Executing query to extract expense data...
+Extracted 25 expense records.
+Preprocessing data for time series analysis...
+Data preprocessing completed.
+Creating visualization: Daily Expenses Time Series
+Visualization saved as daily_expenses_time_series.png
+Creating sequences with length 7...
+Created 10 sequences with length 7 for LSTM training.
+Saving processed data to data directory...
+Saved daily data to data/daily_expenses.csv
+Saved weekly data to data/weekly_expenses.csv
+Saved monthly data to data/monthly_expenses.csv
+Data extraction and preprocessing completed successfully.
+Database connection closed.
+
+2025-04-08 21:31:59,868 - INFO - Starting model training process
+2025-04-08 21:32:03,123 - INFO - Model training completed: 
+2025-04-08 21:32:03,123 - INFO - Retraining pipeline completed successfully

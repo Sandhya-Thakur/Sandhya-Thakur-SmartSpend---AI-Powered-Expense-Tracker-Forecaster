@@ -48,12 +48,6 @@ export default function ExpensesPage() {
           </p>
         </div>
         
-        <Link
-          href="/expenses/add"
-          className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-md text-sm font-medium"
-        >
-          Add Expense
-        </Link>
       </div>
       
       {/* Expense List Component */}

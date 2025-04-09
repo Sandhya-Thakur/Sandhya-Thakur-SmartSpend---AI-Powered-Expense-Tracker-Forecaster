@@ -1,0 +1,71 @@
+2025-04-08 14:17:53,581 - INFO - Starting model training run at 20250408_141753
+2025-04-08 14:17:53,586 - INFO - Loaded 9 records from data/daily_expenses.csv
+2025-04-08 14:17:53,591 - INFO - Training data shape: torch.Size([1, 7, 1]), torch.Size([1, 1])
+2025-04-08 14:17:53,591 - INFO - Testing data shape: torch.Size([1, 7, 1]), torch.Size([1, 1])
+2025-04-08 14:17:54,166 - INFO - Epoch [10/100], Loss: 0.0024
+2025-04-08 14:17:54,180 - INFO - Epoch [20/100], Loss: 0.0001
+2025-04-08 14:17:54,195 - INFO - Epoch [30/100], Loss: 0.0003
+2025-04-08 14:17:54,208 - INFO - Epoch [40/100], Loss: 0.0001
+2025-04-08 14:17:54,222 - INFO - Epoch [50/100], Loss: 0.0000
+2025-04-08 14:17:54,235 - INFO - Epoch [60/100], Loss: 0.0000
+2025-04-08 14:17:54,249 - INFO - Epoch [70/100], Loss: 0.0000
+2025-04-08 14:17:54,263 - INFO - Epoch [80/100], Loss: 0.0000
+2025-04-08 14:17:54,276 - INFO - Epoch [90/100], Loss: 0.0000
+2025-04-08 14:17:54,290 - INFO - Epoch [100/100], Loss: 0.0000
+2025-04-08 14:17:54,292 - INFO - Test MSE: 314.7396
+2025-04-08 14:17:54,292 - INFO - Test RMSE: 17.7409
+2025-04-08 14:17:54,292 - INFO - Test MAE: 17.7409
+2025-04-08 14:17:54,433 - ERROR - Error in future forecasting: [Errno 2] No such file or directory: 'plots/expense_forecast_20250408_141753.png'
+2025-04-08 14:17:54,497 - INFO - Model saved to models/lstm_model.pth
+2025-04-08 14:17:54,497 - INFO - LSTM model training and evaluation completed.
+2025-04-08 14:21:37,345 - INFO - Starting model training run at 20250408_142137
+2025-04-08 14:21:37,347 - INFO - Loaded 9 records from data/daily_expenses.csv
+2025-04-08 14:21:37,352 - INFO - Training data shape: torch.Size([1, 7, 1]), torch.Size([1, 1])
+2025-04-08 14:21:37,352 - INFO - Testing data shape: torch.Size([1, 7, 1]), torch.Size([1, 1])
+2025-04-08 14:21:37,358 - INFO - Loaded existing model from models/lstm_model.pth
+2025-04-08 14:21:37,889 - INFO - Epoch [10/100], Loss: 0.0001
+2025-04-08 14:21:37,907 - INFO - Epoch [20/100], Loss: 0.0000
+2025-04-08 14:21:37,921 - INFO - Epoch [30/100], Loss: 0.0000
+2025-04-08 14:21:37,934 - INFO - Epoch [40/100], Loss: 0.0000
+2025-04-08 14:21:37,947 - INFO - Epoch [50/100], Loss: 0.0000
+2025-04-08 14:21:37,961 - INFO - Epoch [60/100], Loss: 0.0000
+2025-04-08 14:21:37,974 - INFO - Epoch [70/100], Loss: 0.0000
+2025-04-08 14:21:37,987 - INFO - Epoch [80/100], Loss: 0.0000
+2025-04-08 14:21:38,000 - INFO - Epoch [90/100], Loss: 0.0000
+2025-04-08 14:21:38,013 - INFO - Epoch [100/100], Loss: 0.0000
+2025-04-08 14:21:38,014 - INFO - Test MSE: 320.3472
+2025-04-08 14:21:38,014 - INFO - Test RMSE: 17.8982
+2025-04-08 14:21:38,014 - INFO - Test MAE: 17.8982
+2025-04-08 14:21:38,219 - INFO - Model saved to models/lstm_model.pth
+2025-04-08 14:21:38,219 - INFO - LSTM model training and evaluation completed.
+2025-04-08 14:25:46,836 - INFO - Starting model testing...
+2025-04-08 14:25:46,837 - INFO - Testing model loading...
+2025-04-08 14:25:46,844 - INFO - Model loaded successfully
+2025-04-08 14:25:46,844 - INFO - Testing model predictions...
+2025-04-08 14:25:46,848 - INFO - Loaded 9 records from data/daily_expenses.csv
+2025-04-08 14:25:46,849 - INFO - Generating 14 days of predictions...
+2025-04-08 14:25:46,984 - INFO - Predicted values: [62.82439663 62.70215843 62.58327713 62.49618143 62.43737019 62.39957889
+ 62.39497627 62.38688563 62.38737081 62.38768552 62.38784287 62.38789532
+ 62.38794777 62.38794777]
+2025-04-08 14:25:46,984 - INFO - Prediction visualization saved to plots/test_prediction.png
+2025-04-08 14:25:46,984 - INFO - Testing completed
+2025-04-08 21:32:01,833 - INFO - Starting model training run at 20250408_213201
+2025-04-08 21:32:01,839 - INFO - Loaded 17 records from data/daily_expenses.csv
+2025-04-08 21:32:01,844 - INFO - Training data shape: torch.Size([8, 7, 1]), torch.Size([8, 1])
+2025-04-08 21:32:01,844 - INFO - Testing data shape: torch.Size([2, 7, 1]), torch.Size([2, 1])
+2025-04-08 21:32:01,851 - INFO - Loaded existing model from models/lstm_model.pth
+2025-04-08 21:32:02,412 - INFO - Epoch [10/100], Loss: 0.0893
+2025-04-08 21:32:02,427 - INFO - Epoch [20/100], Loss: 0.0869
+2025-04-08 21:32:02,441 - INFO - Epoch [30/100], Loss: 0.0862
+2025-04-08 21:32:02,456 - INFO - Epoch [40/100], Loss: 0.0853
+2025-04-08 21:32:02,470 - INFO - Epoch [50/100], Loss: 0.0836
+2025-04-08 21:32:02,484 - INFO - Epoch [60/100], Loss: 0.0809
+2025-04-08 21:32:02,499 - INFO - Epoch [70/100], Loss: 0.0775
+2025-04-08 21:32:02,514 - INFO - Epoch [80/100], Loss: 0.0775
+2025-04-08 21:32:02,528 - INFO - Epoch [90/100], Loss: 0.0769
+2025-04-08 21:32:02,542 - INFO - Epoch [100/100], Loss: 0.0768
+2025-04-08 21:32:02,544 - INFO - Test MSE: 19661.4785
+2025-04-08 21:32:02,544 - INFO - Test RMSE: 140.2194
+2025-04-08 21:32:02,544 - INFO - Test MAE: 132.1276
+2025-04-08 21:32:02,748 - INFO - Model saved to models/lstm_model.pth
+2025-04-08 21:32:02,748 - INFO - LSTM model training and evaluation completed.
